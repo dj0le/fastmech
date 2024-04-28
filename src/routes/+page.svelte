@@ -10,7 +10,7 @@
 	<img class="headline" src="./mechindex.svg" alt="headline" />
 	<div class="wrapper">
 		<div>
-			<button id="left">*</button>
+			<button id="left">{`<`}</button>
 		</div>
 		<ul class="carousel">
 			<!-- for loop starts here -->
