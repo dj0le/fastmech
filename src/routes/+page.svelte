@@ -1,7 +1,4 @@
-<script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+<script lang="ts">
 </script>
 
 <svelte:head>
@@ -9,51 +6,132 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
+<section class="main">
+	<img class="headline" src="./mechindex.svg" alt="headline" />
+	<div class="wrapper">
+		<div>
+			<button id="left">*</button>
+		</div>
+		<ul class="carousel">
+			<!-- for loop starts here -->
+			<li class="card">
+				<div class="radial-gradient">
+					<img
+						class="card-image"
+						src="./mech_thumbnails/small_MWO_Battlemaster.webp"
+						alt="TWO Battlemech"
+						width="200"
+						height="200"
+					/>
+				</div>
+				<div>
+					<div class="content">
+						<h3 class="card-title">Battlemaster</h3>
+						<div class="info">
+							<p>Assault</p>
+							<p class="align-right">3075</p>
+						</div>
+					</div>
 
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
+					<div class="controls">
+						<a href="mechs/51" class="button primary">
+							Overview
+							<svg
+								width="18"
+								height="10"
+								viewBox="0 0 18 10"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="M13.1667 1.6665L16.5 4.99984M16.5 4.99984L13.1667 8.33317M16.5 4.99984L1.5 4.99984"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+							</svg>
+						</a>
+					</div>
+				</div>
+			</li>
+			<!-- for loop ends here -->
+		</ul>
+		<div class="column-two">
+			<button id="right">></button>
+		</div>
+	</div>
 </section>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
-
-	h1 {
+	.primary {
 		width: 100%;
+		background: var(--text-1);
+		color: var(--surface-1);
 	}
 
-	.welcome {
-		display: block;
+	.primary:hover {
+		color: var(--text-1);
+		background-color: var(--link);
+	}
+
+	.headline {
+		padding-bottom: 40px;
+	}
+	.controls {
+		padding-top: 16px;
+	}
+
+	.carousel {
 		position: relative;
 		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
+		height: 432px;
+		overflow: hidden;
 	}
 
-	.welcome img {
+	.card {
 		position: absolute;
-		width: 100%;
-		height: 100%;
+		transition: 0.5s;
+		left: calc(50% - 130px);
 		top: 0;
-		display: block;
+		display: grid;
+		width: 260px;
+		background-color: var(--surface-3);
+		color: var(--text-3);
+		border: 2px solid var(--border);
+		border-radius: var(--radius-3);
+		padding-inline: 16px;
+		padding-block: 24px;
+	}
+
+	.card-title {
+		font-family: var(--font-title);
+		font-size: 1.75rem;
+		font-weight: var(--font-weight-bold);
+	}
+
+	.card-image {
+		object-fit: cover;
+		object-position: center;
+	}
+
+	.radial-gradient {
+		background: radial-gradient(circle, rgba(255, 255, 255, 0.28) 0%, rgba(0, 212, 255, 0) 60%);
+	}
+
+	.content {
+		padding-top: 16px;
+		padding-inline: 8px;
+	}
+
+	.info {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		justify-content: space-between;
+		font-size: 1.375rem;
+	}
+
+	.align-right {
+		text-align: end;
 	}
 </style>
