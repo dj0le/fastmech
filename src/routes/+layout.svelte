@@ -23,6 +23,7 @@
 		max-inline-size: 1600px;
 		display: grid;
 		grid-template-rows: auto 1fr auto;
+		align-content: space-between;
 		margin-inline: auto;
 		padding-inline: 1rem;
 	}

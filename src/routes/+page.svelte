@@ -1,4 +1,5 @@
 <script lang="ts">
+	export let data;
 </script>
 
 <svelte:head>
@@ -13,49 +14,49 @@
 			<button id="left">{`<`}</button>
 		</div>
 		<ul class="carousel">
-			<!-- for loop starts here -->
-			<li class="card">
-				<div class="radial-gradient">
-					<img
-						class="card-image"
-						src="./mech_thumbnails/small_MWO_Battlemaster.webp"
-						alt="TWO Battlemech"
-						width="200"
-						height="200"
-					/>
-				</div>
-				<div>
-					<div class="content">
-						<h3 class="card-title">Battlemaster</h3>
-						<div class="info">
-							<p>Assault</p>
-							<p class="align-right">3075</p>
+			{#each data.mechs as mech}
+				<li class="card">
+					<div class="radial-gradient">
+						<img
+							class="card-image"
+							src="https://mechbe.thockyspace.com/static/mech_thumbnails/{mech.thumbnail}"
+							alt="TWO Battlemech"
+							width="200"
+							height="200"
+						/>
+					</div>
+					<div>
+						<div class="content">
+							<h3 class="card-title">{mech.chassis}</h3>
+							<div class="info">
+								<p>{mech.weightClass}</p>
+								<p class="align-right">{mech.year}</p>
+							</div>
+						</div>
+
+						<div class="controls">
+							<a href="mechs/{mech.id}" class="button primary">
+								Overview
+								<svg
+									width="18"
+									height="10"
+									viewBox="0 0 18 10"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										d="M13.1667 1.6665L16.5 4.99984M16.5 4.99984L13.1667 8.33317M16.5 4.99984L1.5 4.99984"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									/>
+								</svg>
+							</a>
 						</div>
 					</div>
-
-					<div class="controls">
-						<a href="mechs/51" class="button primary">
-							Overview
-							<svg
-								width="18"
-								height="10"
-								viewBox="0 0 18 10"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="M13.1667 1.6665L16.5 4.99984M16.5 4.99984L13.1667 8.33317M16.5 4.99984L1.5 4.99984"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-							</svg>
-						</a>
-					</div>
-				</div>
-			</li>
-			<!-- for loop ends here -->
+				</li>
+			{/each}
 		</ul>
 		<div class="column-two">
 			<button id="right">></button>
@@ -64,6 +65,15 @@
 </section>
 
 <style>
+	.headline {
+		padding-bottom: 40px;
+	}
+	.carousel {
+		position: relative;
+		width: 100%;
+		height: 432px;
+		overflow: hidden;
+	}
 	.primary {
 		width: 100%;
 		background: var(--text-1);
@@ -75,18 +85,8 @@
 		background-color: var(--link);
 	}
 
-	.headline {
-		padding-bottom: 40px;
-	}
 	.controls {
 		padding-top: 16px;
-	}
-
-	.carousel {
-		position: relative;
-		width: 100%;
-		height: 432px;
-		overflow: hidden;
 	}
 
 	.card {

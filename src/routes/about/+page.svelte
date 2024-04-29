@@ -1,9 +1,27 @@
+<script lang="ts">
+	import MechGrid from '$lib/mechGrid.svelte';
+	// export let data;
+</script>
+
 <svelte:head>
 	<title>About</title>
 	<meta name="description" content="About this app" />
 </svelte:head>
 
 <div class="text-column">
+	<!-- <div>
+		{#each data.mechs as mech}
+			<img
+				src="https://mechbe.thockyspace.com/static/mech_thumbnails/{mech.thumbnail}"
+				alt="thumbnail"
+			/>
+			<p>{mech.chassis}</p>
+			<p>{mech.year}</p>
+			<p>{mech.id}</p>
+		{/each}
+	</div> -->
+
+	<MechGrid />
 	<h1>About this app</h1>
 
 	<p>
