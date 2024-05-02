@@ -7,7 +7,7 @@
 		<div class="radial-gradient">
 			<img
 				class="card-image"
-				src="https://mechbe.thockyspace.com/static/mech_thumbnails/{mech.thumbnail}"
+				src="https://po4cwo4.thockyspace.com/static/mech_thumbnails/{mech.thumbnail}"
 				alt="TWO Battlemech"
 				width="200"
 				height="200"
