@@ -20,17 +20,11 @@
 	.layout {
 		height: 100%;
 		min-height: 100vh;
-		max-inline-size: 1600px;
 		display: grid;
 		grid-template-rows: auto 1fr auto;
+		align-items: center;
 		align-content: space-between;
 		margin-inline: auto;
-		padding-inline: 1rem;
-	}
-
-	@media (min-width: 1664px) {
-		.layout {
-			padding-inline: 0;
-		}
+		padding-inline: 2rem;
 	}
 </style>

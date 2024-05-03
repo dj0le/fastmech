@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let mech;
+	let { data } = $props();
 </script>
 
 <main>
@@ -13,46 +13,46 @@
 				<div class="overview-image">
 					<img
 						class="card-image"
-						src="https://po4cwo4.thockyspace.com/static/mech_images/{mech.fullsize}"
-						alt={mech.chassis}
+						src="https://po4cwo4.thockyspace.com/static/mech_images/{data.details.fullsize}"
+						alt={data.details.chassis}
 						width="1000"
 						height="1000"
 					/>
 				</div>
 
 				<div>
-					<h1 class="decoration">{mech.chassis}</h1>
+					<h1 class="decoration">{data.details.chassis}</h1>
 					<div class="info-grid">
 						<h2 class="overview-h2">overview</h2>
 						<div class="details">
 							<div class="column-left">Year:</div>
-							<div class="column-right">{mech.year}</div>
+							<div class="column-right">{data.details.year}</div>
 							<div class="column-left">Designation:</div>
-							<div class="column-right">{mech.model}</div>
+							<div class="column-right">{data.details.model}</div>
 							<div class="column-left">Weight</div>
-							<div class="column-right">{mech.weight}</div>
+							<div class="column-right">{data.details.weight}</div>
 							<div class="column-left">Class:</div>
-							<div class="column-right">{mech.weightClass}</div>
+							<div class="column-right">{data.details.weightClass}</div>
 							<div class="column-left">Cost:</div>
-							<div class="column-right">{mech.cost}</div>
+							<div class="column-right">{data.details.cost}</div>
 							<div class="column-left">BV:</div>
-							<div class="column-right">{mech.bv}</div>
+							<div class="column-right">{data.details.bv}</div>
 							<div class="column-left">Origin:</div>
-							<div class="column-right">{mech.isClan}</div>
+							<div class="column-right">{data.details.isClan}</div>
 							<div class="column-left">Armor Type:</div>
-							<div class="column-right">{mech.armorType}</div>
+							<div class="column-right">{data.details.armorType}</div>
 							<div class="column-left">External Armor:</div>
-							<div class="column-right">{mech.totalExternalArmor}</div>
+							<div class="column-right">{data.details.totalExternalArmor}</div>
 							<div class="column-left">Internal Armor:</div>
-							<div class="column-right">{mech.totalInternalArmor}</div>
+							<div class="column-right">{data.details.totalInternalArmor}</div>
 							<div class="column-left">Structure Type:</div>
-							<div class="column-right">{mech.structureType}</div>
+							<div class="column-right">{data.details.structureType}</div>
 							<div class="column-left">Engine:</div>
-							<div class="column-right">{mech.engine}</div>
+							<div class="column-right">{data.details.engine}</div>
 							<div class="column-left">Heat Capacity:</div>
-							<div class="column-right">{mech.heatCapacity}</div>
+							<div class="column-right">{data.details.heatCapacity}</div>
 							<div class="column-left">Heat Sinks:</div>
-							<div class="column-right">{mech.heatSinks}</div>
+							<div class="column-right">{data.details.heatSinks}</div>
 						</div>
 					</div>
 				</div>
@@ -68,7 +68,7 @@
 <style>
 	.mech-grid {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1.25fr 1fr;
 		align-items: center;
 	}
 
@@ -115,7 +115,7 @@
 		color: var(--text-4);
 	}
 
-	@media (max-width: 848px) {
+	@media (max-width: 1100px) {
 		.mech-grid {
 			grid-template-columns: 1fr;
 		}
@@ -125,7 +125,7 @@
 		}
 	}
 
-	@media (min-width: 848px) {
+	@media (min-width: 1101px) {
 		.decoration {
 			font-size: clamp(3rem, 7vw, 7.8125rem);
 			margin-left: -4rem;

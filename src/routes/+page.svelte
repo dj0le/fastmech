@@ -29,12 +29,10 @@
 		function loadCards() {
 			const card = cards[currentCard];
 			const visibleCard = visibleCards[currentCard];
-			console.log(card);
-
-			card['style'].transform = 'none';
-			card['style'].zIndex = 5;
+			card.style.transform = 'none';
+			card.style.zIndex = 5;
 			card.style.filter = 'none';
-			card['style'].opacity = 1;
+			card.style.opacity = 1;
 
 			for (let i = currentCard + 1; i != cards.length; i++) {
 				cards[i].style.opacity = 0;
@@ -53,7 +51,6 @@
 						: `translateX(${(i - 3) * 120}px) translateY(${(i - 3) * 40}px) scale(${
 								(8 - i) * 0.2
 							}) perspective(16px) rotateY(-1deg)`;
-				console.log(card);
 			}
 		}
 		loadCards();
@@ -62,7 +59,7 @@
 
 <svelte:head>
 	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<meta name="description" content="Mech Index" />
 </svelte:head>
 
 <section class="main">
@@ -93,7 +90,7 @@
 						</div>
 
 						<div class="controls">
-							<a href="mechs/{mech.id}" class="button primary">
+							<a href="details/{mech.id}" class="button primary">
 								Overview
 								<svg
 									width="18"

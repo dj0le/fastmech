@@ -87,7 +87,6 @@ body {
 }
 
 .main {
-	padding-top: 6rem;
 	display: grid;
 	gap: 6rem;
 	place-content: center;
@@ -157,7 +156,7 @@ footer {
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;
-	padding-top: 8px;
+	padding-top: 16px;
 	width: 100%;
 }
 
@@ -165,10 +164,15 @@ footer {
 	.main {
 		padding-inline: 16px;
 	}
+	footer {
+		display: block;
+		padding-top: 4px;
+	}
 	.wrapper {
 		grid-template-columns: repeat(2, 1fr);
 	}
-	.carousel {
+	.carousel,
+	.mech-overview {
 		grid-row-start: 1;
 		grid-column: 1 / 3;
 	}
