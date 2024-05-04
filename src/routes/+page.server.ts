@@ -1,5 +1,5 @@
 async function getMechs() {
-	const response = await fetch('https://po4cwo4.thockyspace.com/mechs/');
+	const response = await fetch('https://po4cwo4.thockyspace.com/');
 	return response.json();
 }
 
