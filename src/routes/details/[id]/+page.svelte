@@ -95,7 +95,7 @@
 
 	.decoration {
 		display: inline-block;
-		background-image: url('./lines.svg');
+		background-image: url('/lines.svg');
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: 95%;
