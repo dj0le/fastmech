@@ -13,9 +13,9 @@
 				<div class="overview-image">
 					<img
 						class="card-image"
-						src="https://po4cwo4.thockyspace.com/static/mech_images/{data.details.fullsize}"
+						src="https://po4cwo4.thockyspace.com/static/fullsize/{data.details.fullsize}"
 						alt={data.details.chassis}
-						width="1000"
+						width="auto"
 						height="1000"
 					/>
 				</div>
@@ -25,26 +25,28 @@
 					<div class="info-grid">
 						<h2 class="overview-h2">overview</h2>
 						<div class="details">
+							<div class="column-left">Designation:</div>
+							<div class="column-right">{data.details.shortName}</div>
 							<div class="column-left">Year:</div>
 							<div class="column-right">{data.details.year}</div>
-							<div class="column-left">Designation:</div>
-							<div class="column-right">{data.details.model}</div>
 							<div class="column-left">Weight</div>
 							<div class="column-right">{data.details.weight}</div>
 							<div class="column-left">Class:</div>
 							<div class="column-right">{data.details.weightClass}</div>
+							<div class="column-left">Role:</div>
+							<div class="column-right">{data.details.role}</div>
 							<div class="column-left">Cost:</div>
 							<div class="column-right">{data.details.cost}</div>
 							<div class="column-left">BV:</div>
 							<div class="column-right">{data.details.bv}</div>
 							<div class="column-left">Origin:</div>
-							<div class="column-right">{data.details.isClan}</div>
+							<div class="column-right">{data.details.origin}</div>
 							<div class="column-left">Armor Type:</div>
 							<div class="column-right">{data.details.armorType}</div>
 							<div class="column-left">External Armor:</div>
-							<div class="column-right">{data.details.totalExternalArmor}</div>
+							<div class="column-right">{data.details.externalArmor}</div>
 							<div class="column-left">Internal Armor:</div>
-							<div class="column-right">{data.details.totalInternalArmor}</div>
+							<div class="column-right">{data.details.internalArmor}</div>
 							<div class="column-left">Structure Type:</div>
 							<div class="column-right">{data.details.structureType}</div>
 							<div class="column-left">Engine:</div>
@@ -70,6 +72,10 @@
 		display: grid;
 		grid-template-columns: 1.25fr 1fr;
 		align-items: center;
+	}
+
+	.overview-image {
+		justify-self: end;
 	}
 
 	.info-grid {

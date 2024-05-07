@@ -1,6 +1,25 @@
 <script lang="ts">
 	let { data } = $props();
 
+	// const mechList: number[] = [];
+	// function addIdToList(id: number) {
+	// 	if (!mechList.includes(id)) {
+	// 		mechList.push(id);
+	// 	}
+	// 	return mechList;
+	// }
+
+	const mechList: number[] = $state([]);
+
+	function addIdToList(id: number) {
+		if (!mechList.includes(id)) {
+			mechList.push(id);
+		}
+		return mechList;
+	}
+
+	console.log(mechList);
+
 	$effect(() => {
 		const cards = document.querySelectorAll('.card');
 		const navigation = document.querySelectorAll('.wrapper button');
@@ -70,11 +89,12 @@
 		</div>
 		<ul class="carousel">
 			{#each data.mechs as mech}
+				{void addIdToList(mech.id)}
 				<li class="card">
 					<div class="radial-gradient">
 						<img
 							class="card-image"
-							src="https://po4cwo4.thockyspace.com/static/mech_thumbnails/{mech.thumbnail}"
+							src="https://po4cwo4.thockyspace.com/static/thumbs/{mech.thumbnail}"
 							alt="TWO Battlemech"
 							width="200"
 							height="200"
@@ -85,7 +105,7 @@
 							<h3 class="card-title">{mech.chassis}</h3>
 							<div class="info">
 								<p>{mech.weightClass}</p>
-								<p class="align-right">{mech.year}</p>
+								<p class="align-right">{mech.role}</p>
 							</div>
 						</div>
 

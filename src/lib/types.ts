@@ -1,16 +1,17 @@
 export interface Mech {
 	id: number;
+	shortName: string;
 	chassis: string;
-	model: string;
 	weightClass: string;
+	role: string;
 	weight: number;
 	year: number;
 	cost: number;
 	bv: number;
-	isClan: string;
+	origin: string;
 	armorType: string;
-	totalExternalArmor: number;
-	totalInternalArmor: number;
+	externalArmor: number;
+	internalArmor: number;
 	structureType: string;
 	engine: string;
 	heatCapacity: number;
@@ -22,6 +23,6 @@ export interface MechShort {
 	id: number;
 	chassis: string;
 	weightClass: string;
-	year: number;
+	role: number;
 	thumbnail: string;
 }
