@@ -1,14 +1,6 @@
 <script lang="ts">
 	let { data } = $props();
 
-	// const mechList: number[] = [];
-	// function addIdToList(id: number) {
-	// 	if (!mechList.includes(id)) {
-	// 		mechList.push(id);
-	// 	}
-	// 	return mechList;
-	// }
-
 	const mechList: number[] = $state([]);
 
 	function addIdToList(id: number) {
@@ -96,8 +88,6 @@
 							class="card-image"
 							src="https://po4cwo4.thockyspace.com/static/thumbs/{mech.thumbnail}"
 							alt="TWO Battlemech"
-							width="200"
-							height="200"
 						/>
 					</div>
 					<div>
@@ -146,7 +136,7 @@
 	.carousel {
 		position: relative;
 		width: 100%;
-		height: 432px;
+		height: 520px;
 		overflow: hidden;
 		z-index: 5;
 	}
@@ -171,19 +161,20 @@
 		left: calc(50% - 130px);
 		top: 0;
 		display: grid;
-		width: 260px;
+		width: 280px;
 		background-color: var(--surface-3);
 		color: var(--text-3);
 		border: 2px solid var(--border);
 		border-radius: var(--radius-3);
 		padding-inline: 16px;
-		padding-block: 24px;
+		padding-block: 16px;
 	}
 
 	.card-title {
 		font-family: var(--font-title);
 		font-size: 1.75rem;
 		font-weight: var(--font-weight-bold);
+		text-shadow: 1px 1px 4px var(--text-1);
 	}
 
 	.card-image {
@@ -192,6 +183,7 @@
 	}
 
 	.radial-gradient {
+		height: 250px;
 		background: radial-gradient(circle, rgba(255, 255, 255, 0.28) 0%, rgba(0, 212, 255, 0) 60%);
 	}
 
