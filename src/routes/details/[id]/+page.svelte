@@ -1,11 +1,25 @@
 <script lang="ts">
 	let { data } = $props();
+
+	function previousMech(mechId) {
+		const totalMechs = 97;
+		mechId = (mechId - 1 + totalMechs) % totalMechs;
+		console.log(mechId);
+		return mechId;
+	}
+
+	function nextMech(mechId) {
+		const totalMechs = 97;
+		mechId = (mechId + 1) % totalMechs;
+		console.log(mechId);
+		return mechId;
+	}
 </script>
 
 <main>
 	<div class="wrapper">
 		<div>
-			<button id="left">{`<`}</button>
+			<a href={previousMech(data.details.id)} id="left">{`<`}</a>
 		</div>
 
 		<div class="mech-overview">
@@ -62,7 +76,7 @@
 		</div>
 
 		<div class="column-two">
-			<button id="right">{`>`}</button>
+			<a href={nextMech(data.details.id)} id="right">{`>`}</a>
 		</div>
 	</div>
 </main>

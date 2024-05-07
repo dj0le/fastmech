@@ -1,17 +1,6 @@
 <script lang="ts">
 	let { data } = $props();
 
-	const mechList: number[] = $state([]);
-
-	function addIdToList(id: number) {
-		if (!mechList.includes(id)) {
-			mechList.push(id);
-		}
-		return mechList;
-	}
-
-	console.log(mechList);
-
 	$effect(() => {
 		const cards = document.querySelectorAll('.card');
 		const navigation = document.querySelectorAll('.wrapper button');
@@ -28,6 +17,7 @@
 			}
 			visibleCards.push(card);
 		}
+		console.log(visibleCards);
 
 		navigation.forEach((btn) => {
 			btn.addEventListener('click', () => {
@@ -81,7 +71,6 @@
 		</div>
 		<ul class="carousel">
 			{#each data.mechs as mech}
-				{void addIdToList(mech.id)}
 				<li class="card">
 					<div class="radial-gradient">
 						<img
