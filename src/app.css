@@ -160,6 +160,26 @@ footer {
 	width: 100%;
 }
 
+/* animations */
+
+.bloom-out-1 {
+	animation:
+		var(--animation-fade-in-bloom) forwards,
+		var(--animation-scale-down);
+	animation-timing-function: var(--ease-elastic-in-out-3);
+	animation-duration: 1s;
+}
+
+.bloom-out-2 {
+	animation: var(--animation-scale-down), var(--animation-fade-out-bloom);
+	animation-timing-function: var(--ease-elastic-in-out-4);
+}
+
+.super-ping {
+	animation: var(--animation-fade-in-bloom), var(--animation-ping);
+	animation-duration: 0.25s;
+}
+
 @media (max-width: 770px) {
 	.main {
 		padding-inline: 16px;

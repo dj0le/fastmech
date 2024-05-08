@@ -6,6 +6,8 @@
 		const navigation = document.querySelectorAll('.wrapper button');
 		let visibleCards: number[][] = [];
 		let currentCard = 0;
+		const mechCount = cards.length;
+		console.log(mechCount);
 
 		for (let i = 0; i < cards.length; i++) {
 			const offsets = [-4, -3, -2, -1, 1, 2, 3, 4].map((offset) => ({
@@ -17,7 +19,6 @@
 			}
 			visibleCards.push(card);
 		}
-		console.log(visibleCards);
 
 		navigation.forEach((btn) => {
 			btn.addEventListener('click', () => {

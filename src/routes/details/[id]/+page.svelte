@@ -1,20 +1,19 @@
 <script lang="ts">
 	let { data } = $props();
+	const totalMechs = 97;
 
 	function previousMech(mechId) {
-		const totalMechs = 97;
-		if (mechId >= 2) {
-			mechId = (mechId - 1 + totalMechs) % totalMechs;
-		} else mechId = 96;
-		console.log(mechId);
+		mechId = (mechId - 1 + totalMechs) % totalMechs;
+		if (mechId === 0) {
+			mechId = totalMechs - 1;
+		}
 		return mechId;
 	}
 	function nextMech(mechId) {
-		const totalMechs = 97;
-		if (mechId <= 95) {
-			mechId = (mechId + 1 + totalMechs) % totalMechs;
-		} else mechId = 1;
-
+		mechId = (mechId + 1 + totalMechs) % totalMechs;
+		if (mechId === 0) {
+			mechId = 1;
+		}
 		return mechId;
 	}
 </script>
@@ -26,7 +25,7 @@
 		</div>
 
 		<div class="mech-overview">
-			<div class="mech-grid">
+			<div class="mech-grid faded">
 				<div class="overview-image">
 					<img
 						class="card-image"
@@ -90,6 +89,11 @@
 		grid-template-columns: 1.25fr 1fr;
 		gap: 8px;
 		align-items: center;
+	}
+
+	.faded {
+		animation: var(--animation-fade-in-bloom) forwards;
+		animation-duration: 0.2s;
 	}
 
 	.overview-image {
