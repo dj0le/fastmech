@@ -172,6 +172,7 @@
 	}
 
 	.radial-gradient {
+		justify-self: center;
 		height: 250px;
 		background: radial-gradient(circle, rgba(255, 255, 255, 0.28) 0%, rgba(0, 212, 255, 0) 60%);
 	}

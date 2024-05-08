@@ -3,22 +3,25 @@
 
 	function previousMech(mechId) {
 		const totalMechs = 97;
-		mechId = (mechId - 1 + totalMechs) % totalMechs;
+		if (mechId >= 2) {
+			mechId = (mechId - 1 + totalMechs) % totalMechs;
+		} else mechId = 96;
 		console.log(mechId);
 		return mechId;
 	}
-
 	function nextMech(mechId) {
 		const totalMechs = 97;
-		mechId = (mechId + 1) % totalMechs;
-		console.log(mechId);
+		if (mechId <= 95) {
+			mechId = (mechId + 1 + totalMechs) % totalMechs;
+		} else mechId = 1;
+
 		return mechId;
 	}
 </script>
 
 <main>
 	<div class="wrapper">
-		<div>
+		<div class="arrow-nav">
 			<a href={previousMech(data.details.id)} id="left">{`<`}</a>
 		</div>
 
@@ -34,10 +37,10 @@
 					/>
 				</div>
 
-				<div>
+				<div class="column">
 					<h1 class="decoration">{data.details.chassis}</h1>
 					<div class="info-grid">
-						<h2 class="overview-h2">overview</h2>
+						<h2 class="overview-h2">OVERVIEW</h2>
 						<div class="details">
 							<div class="column-left">Designation:</div>
 							<div class="column-right">{data.details.shortName}</div>
@@ -75,7 +78,7 @@
 			</div>
 		</div>
 
-		<div class="column-two">
+		<div class="arrow-nav column-two">
 			<a href={nextMech(data.details.id)} id="right">{`>`}</a>
 		</div>
 	</div>
@@ -85,6 +88,7 @@
 	.mech-grid {
 		display: grid;
 		grid-template-columns: 1.25fr 1fr;
+		gap: 8px;
 		align-items: center;
 	}
 
@@ -115,11 +119,11 @@
 
 	.decoration {
 		display: inline-block;
-		background-image: url('/lines.svg');
-		background-repeat: no-repeat;
+		background-image: url('/shortlines.svg');
+		background-repeat: repeat-x;
 		background-size: cover;
-		background-position: 95%;
-		color: transparent;
+		background-position: center;
+		color: var(--text-2);
 		background-clip: text;
 		-webkit-background-clip: text;
 		font-family: var(--font-title);
@@ -139,19 +143,31 @@
 		.mech-grid {
 			grid-template-columns: 1fr;
 		}
+		.column {
+			justify-self: center;
+			padding-bottom: 4rem;
+		}
 		.decoration {
 			padding-block: 32px;
-			font-size: clamp(2rem, 10vw, 7.8125rem);
+			font-size: 10vw;
+		}
+		.overview-h2 {
+			justify-self: center;
+			font-size: 1.25rem;
+			text-decoration: underline;
+		}
+		.arrow-nav {
+			padding-bottom: 4rem;
 		}
 	}
 
 	@media (min-width: 1101px) {
 		.decoration {
-			font-size: clamp(3rem, 7vw, 7.8125rem);
-			margin-left: -4rem;
+			font-size: 7vw;
+			margin-left: -3rem;
 		}
 		.overview-h2 {
-			padding-top: 2rem;
+			padding-top: 6rem;
 		}
 	}
 </style>

@@ -1,38 +1,34 @@
-# create-svelte
+# Mech Index Front End
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+This is the front end implementation for the mech index project. The mech index is a list of ~100 Battletech mechs. The full project consists of many technologies. The front end is build in svelte 5 with typescript, and uses Open Props for efficient CSS styling. The back end was written in Python, using FastAPI. The database is SQL Lite. The project is hosted on a VPS running Coolify.
 
-## Creating a project
+To see the current project implementation:
 
-If you're seeing this, you've probably already done this step. Congrats!
+[`https://mech-index.com/`](https://mech-index.com/).
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Developing:
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Steps to run this locally:
 
 ```bash
-npm run dev
+# 1. Clone the repo
+git clone https://github.com/dj0le/fastmech.git
 
-# or start the server and open the app in a new browser tab
+# 2. from inside the cloned directory, install dependencies:
+npm install
+
+# 3. Start the server and open the app in a new browser tab
 npm run dev -- --open
 ```
 
-## Building
+## Further Steps:
 
-To create a production version of your app:
+This front end connects with a FASTAPI Backend. The code, and installation instructions for the backend are available in this repo:
 
-```bash
-npm run build
-```
+[`Mech-Index Backend code`](https://github.com/dj0le/mech-index)
 
-You can preview the production build with `npm run preview`.
+## Remaining Steps:
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+1. Add Filtering and Dynamic Search to the front carousel
+2. Better transitions from details page
+3. Fix details page headline / svg
