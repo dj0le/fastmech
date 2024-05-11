@@ -170,12 +170,14 @@
 	.card-image {
 		object-fit: cover;
 		object-position: center;
+		margin-top: -8px;
 	}
 
 	.radial-gradient {
+		margin-top: 8px;
 		justify-self: center;
 		height: 250px;
-		background: radial-gradient(circle, rgba(255, 255, 255, 0.28) 0%, rgba(0, 212, 255, 0) 60%);
+		background: radial-gradient(circle, var(--radial-1) 0%, var(--radial-2) 100%);
 	}
 
 	.content {

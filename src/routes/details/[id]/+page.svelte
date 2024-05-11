@@ -92,8 +92,9 @@
 	}
 
 	.faded {
-		animation: var(--animation-fade-in-bloom) forwards;
-		animation-duration: 0.2s;
+		opacity: 0;
+		animation: var(--animation-fade-in) forwards;
+		animation-duration: 1s;
 	}
 
 	.overview-image {
