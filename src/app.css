@@ -2,7 +2,7 @@
 
 :root {
 	--surface-1: hsl(104, 12%, 56%);
-	--surface-2: hsl(104, 12%, 12%);
+	--surface-2: hsl(104, 12%, 66%);
 	--surface-3: hsl(104, 12%, 22%);
 	--surface-4: hsl(104, 12%, 36%);
 	--text-1: hsl(102, 21%, 7%);
@@ -13,11 +13,14 @@
 	--link: hsl(44, 12%, 56%);
 	--radial-1: hsl(80, 8%, 42%);
 	--radial-2: hsl(104, 12%, 22%);
+	--shadow-1: hsl(104, 12%, 10%);
+	--shadow-2: hsl(104, 12%, 20%);
+	--shadow-3: hsl(104, 12%, 30%);
+	--shadow-4: hsl(104, 12%, 40%);
+	--shadow-5: hsl(104, 12%, 50%);
 
 	--space-sm: var(--size-3);
 	--space-lg: var(--size-5);
-
-	--timing-function-slow-ease: var(--ease-1);
 
 	--font-size-sm: var(--font-size-0);
 	--font-size-body: 1.125rem;
@@ -37,12 +40,13 @@ body {
 	background-image: url('/mechindexbg.svg'),
 		linear-gradient(
 			166deg,
-			rgba(163, 179, 158, 1) 0%,
-			rgba(137, 157, 130, 1) 35%,
-			rgba(137, 157, 130, 1) 65%,
-			rgba(97, 112, 92, 1) 100%
+			var(--surface-2) 0%,
+			var(--surface-1) 30%,
+			var(--surface-1) 65%,
+			var(--surface-4) 100%
 		);
 	background-position: center;
+	background-repeat: repeat;
 	background-size: contain;
 	background-color: var(--surface-1);
 	color: var(--text-1);
@@ -75,7 +79,7 @@ a :hover {
 
 .button {
 	-webkit-font-smoothing: antialiased;
-
+	touch-action: manipulation;
 	border-radius: var(--radius-2);
 	cursor: pointer;
 	display: inline-grid;
@@ -84,7 +88,7 @@ a :hover {
 	padding: 12px 24px;
 	place-items: center;
 	text-align: center;
-	transition: background-color 0.2s var(--timing-function-slow-ease);
+	transition: background-color 0.2s var(--ease-1);
 }
 
 #right,
@@ -108,20 +112,20 @@ a :hover {
 
 #left:active {
 	box-shadow:
-		rgba(50, 50, 50, 0.4) 5px 5px,
-		rgba(50, 50, 50, 0.3) 10px 10px,
-		rgba(50, 50, 50, 0.2) 15px 15px,
-		rgba(50, 50, 50, 0.1) 20px 20px,
-		rgba(50, 50, 50, 0.05) 25px 25px;
+		var(--shadow-1) 5px 5px,
+		var(--shadow-2) 10px 10px,
+		var(--shadow-3) 15px 15px,
+		var(--shadow-4) 20px 20px,
+		var(--shadow-5) 25px 25px;
 }
 
 #right:active {
 	box-shadow:
-		rgba(50, 50, 50, 0.4) -5px 5px,
-		rgba(50, 50, 50, 0.3) -10px 10px,
-		rgba(50, 50, 50, 0.2) -15px 15px,
-		rgba(50, 50, 50, 0.1) -20px 20px,
-		rgba(50, 50, 50, 0.05) -25px 25px;
+		var(--shadow-1) -5px 5px,
+		var(--shadow-2) -10px 10px,
+		var(--shadow-3) -15px 15px,
+		var(--shadow-4) -20px 20px,
+		var(--shadow-5) -25px 25px;
 }
 
 nav,
@@ -131,27 +135,6 @@ footer {
 	align-items: baseline;
 	padding-top: 16px;
 	width: 100%;
-}
-
-/* animations */
-
-.bloom-out-1 {
-	opacity: 0;
-	animation:
-		var(--animation-fade-in-bloom) forwards,
-		var(--animation-scale-down);
-	animation-timing-function: var(--ease-elastic-in-out-3);
-	animation-duration: 1s;
-}
-
-.bloom-out-2 {
-	animation: var(--animation-scale-down), var(--animation-fade-out-bloom);
-	animation-timing-function: var(--ease-elastic-in-out-4);
-}
-
-.super-ping {
-	animation: var(--animation-fade-in-bloom), var(--animation-ping);
-	animation-duration: 0.25s;
 }
 
 @media (max-width: 770px) {
