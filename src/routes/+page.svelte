@@ -81,7 +81,6 @@
 			</svg>
 		</div>
 	</div>
-	<!-- <img class="headline" src="./mechindex.svg" alt="headline" /> -->
 	<div class="wrapper">
 		<div>
 			<button id="left">{`<`}</button>
@@ -204,6 +203,7 @@
 
 	.radial-gradient {
 		margin-top: 8px;
+		padding-inline: 8px;
 		justify-self: center;
 		height: 250px;
 		background: radial-gradient(circle, var(--radial-1) 0%, var(--radial-2) 100%);

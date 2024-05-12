@@ -123,14 +123,7 @@
 	}
 
 	.decoration {
-		display: inline-block;
-		background-image: url('/shortlines.svg');
-		background-repeat: repeat-x;
-		background-size: cover;
-		background-position: center;
 		color: var(--text-2);
-		background-clip: text;
-		-webkit-background-clip: text;
 		font-family: var(--font-title);
 		font-weight: var(--font-weight-hero);
 		letter-spacing: -var(--letter-spacing-title);
@@ -168,7 +161,7 @@
 
 	@media (min-width: 1101px) {
 		.decoration {
-			font-size: 7vw;
+			font-size: 6vw;
 			margin-left: -3rem;
 		}
 		.overview-h2 {
