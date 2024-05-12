@@ -65,7 +65,23 @@
 </svelte:head>
 
 <section class="main">
-	<img class="headline" src="./mechindex.svg" alt="headline" />
+	<div class="h1-container">
+		<h1 class="headline">Mech Index</h1>
+		<div class="lines">
+			<svg
+				width="1138"
+				height="21"
+				viewBox="0 0 1138 21"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path d="M0 19H1138" stroke="#899D82" stroke-opacity="0.8" stroke-width="3" />
+				<path d="M0 10H1138" stroke="#899D82" stroke-opacity="0.6" stroke-width="2" />
+				<path d="M0 1H1138" stroke="#899D82" stroke-opacity="0.4" stroke-width="2" />
+			</svg>
+		</div>
+	</div>
+	<!-- <img class="headline" src="./mechindex.svg" alt="headline" /> -->
 	<div class="wrapper">
 		<div>
 			<button id="left">{`<`}</button>
@@ -120,8 +136,22 @@
 </section>
 
 <style>
+	.h1-container {
+		display: grid;
+		place-items: center;
+	}
+
+	.lines {
+		margin-top: -15.5rem;
+		width: 100%;
+	}
 	.headline {
 		padding-bottom: 40px;
+		font-family: var(--font-title);
+		color: var(--text-2);
+		font-size: 208px;
+		font-weight: var(--font-weight-hero);
+		letter-spacing: var(--letter-spacing-title);
 	}
 	.carousel {
 		position: relative;
@@ -156,8 +186,7 @@
 		color: var(--text-3);
 		border: 2px solid var(--border);
 		border-radius: var(--radius-3);
-		padding-inline: 16px;
-		padding-block: 16px;
+		padding: 16px;
 	}
 
 	.card-title {
@@ -194,5 +223,24 @@
 
 	.align-right {
 		text-align: end;
+	}
+
+	@media (max-width: 1160px) {
+		.lines {
+			margin-top: -10.5rem;
+		}
+		.headline {
+			padding-bottom: 40px;
+			font-size: 100px;
+		}
+	}
+	@media (max-width: 620px) {
+		.lines {
+			margin-top: -2.75rem;
+		}
+		.headline {
+			padding-bottom: 0px;
+			font-size: 50px;
+		}
 	}
 </style>
