@@ -37,7 +37,23 @@
 				</div>
 
 				<div class="column">
-					<h1 class="decoration">{data.details.chassis}</h1>
+					<div class="h1-container">
+						<h1 class="decoration">{data.details.chassis}</h1>
+						<div class="lines">
+							<svg
+								width="1000"
+								height="21"
+								viewBox="0 0 1000 21"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path d="M0 19H50" stroke="#899D82" stroke-opacity="0.8" stroke-width="3" />
+								<path d="M0 10H50" stroke="#899D82" stroke-opacity="0.6" stroke-width="2" />
+								<path d="M0 1H50" stroke="#899D82" stroke-opacity="0.4" stroke-width="2" />
+							</svg>
+						</div>
+					</div>
+
 					<div class="info-grid">
 						<h2 class="overview-h2">OVERVIEW</h2>
 						<div class="details">
@@ -90,7 +106,15 @@
 		gap: 8px;
 		align-items: center;
 	}
+	.h1-container {
+		display: grid;
+		place-items: center;
+	}
 
+	.lines {
+		margin-top: -4.25rem;
+		width: 100%;
+	}
 	.faded {
 		opacity: 0;
 		animation: var(--animation-fade-in) forwards;
@@ -147,7 +171,7 @@
 		}
 		.decoration {
 			padding-block: 32px;
-			font-size: 10vw;
+			font-size: var(--font-size-fluid-3);
 		}
 		.overview-h2 {
 			justify-self: center;
@@ -161,7 +185,7 @@
 
 	@media (min-width: 1101px) {
 		.decoration {
-			font-size: 6vw;
+			font-size: 5vw;
 			margin-left: -3rem;
 		}
 		.overview-h2 {
