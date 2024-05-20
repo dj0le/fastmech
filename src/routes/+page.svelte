@@ -141,11 +141,10 @@
 	}
 
 	.lines {
-		margin-top: -15.5rem;
+		margin-top: -172px;
 		width: 100%;
 	}
 	.headline {
-		padding-bottom: 40px;
 		font-family: var(--font-title);
 		color: var(--text-2);
 		font-size: 208px;

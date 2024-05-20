@@ -37,26 +37,28 @@
 				</div>
 
 				<div class="column">
-					<div class="h1-container">
-						<h1 class="decoration">{data.details.chassis}</h1>
-						<div class="lines">
-							<svg
-								width="1000"
-								height="21"
-								viewBox="0 0 1000 21"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path d="M0 19H50" stroke="#899D82" stroke-opacity="0.8" stroke-width="3" />
-								<path d="M0 10H50" stroke="#899D82" stroke-opacity="0.6" stroke-width="2" />
-								<path d="M0 1H50" stroke="#899D82" stroke-opacity="0.4" stroke-width="2" />
-							</svg>
-						</div>
-					</div>
-
 					<div class="info-grid">
-						<h2 class="overview-h2">OVERVIEW</h2>
+						<div class="h1-container">
+							<h1 class="decoration">{data.details.chassis}</h1>
+							<div class="lines">
+								<svg
+									width="1138"
+									height="21"
+									viewBox="0 0 1138 21"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path d="M0 19H1138" stroke="#899D82" stroke-opacity="0.8" stroke-width="3" />
+									<path d="M0 10H1138" stroke="#899D82" stroke-opacity="0.6" stroke-width="2" />
+									<path d="M0 1H1138" stroke="#899D82" stroke-opacity="0.4" stroke-width="2" />
+								</svg>
+							</div>
+						</div>
 						<div class="details">
+							<div class="column-left">
+								<h2 class="overview-h2">overview:</h2>
+							</div>
+							<div class="column-right"></div>
 							<div class="column-left">Designation:</div>
 							<div class="column-right">{data.details.shortName}</div>
 							<div class="column-left">Year:</div>
@@ -108,11 +110,16 @@
 	}
 	.h1-container {
 		display: grid;
-		place-items: center;
+		align-items: center;
 	}
-
+	.decoration {
+		color: var(--text-2);
+		font-family: var(--font-title);
+		font-weight: var(--font-weight-hero);
+		letter-spacing: -var(--letter-spacing-title);
+		line-height: 0.9em;
+	}
 	.lines {
-		margin-top: -4.25rem;
 		width: 100%;
 	}
 	.faded {
@@ -132,8 +139,7 @@
 
 	.details {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		justify-items: center;
+		grid-template-columns: 1fr 1.6fr;
 		gap: 2px;
 	}
 
@@ -146,17 +152,9 @@
 		padding-left: 8px;
 	}
 
-	.decoration {
-		color: var(--text-2);
-		font-family: var(--font-title);
-		font-weight: var(--font-weight-hero);
-		letter-spacing: -var(--letter-spacing-title);
-		line-height: 0.9em;
-	}
-
 	.overview-h2 {
 		font-family: var(--font-title);
-		font-size: 2rem;
+		font-size: 1.5rem;
 		font-weight: var(--font-weight-bold);
 		color: var(--text-4);
 	}
@@ -181,15 +179,25 @@
 		.arrow-nav {
 			padding-bottom: 4rem;
 		}
+		.lines {
+			margin-top: -14%;
+		}
 	}
-
 	@media (min-width: 1101px) {
+		.h1-container {
+			margin-left: -24px;
+		}
 		.decoration {
+			text-align: left;
 			font-size: 5vw;
-			margin-left: -3rem;
 		}
 		.overview-h2 {
-			padding-top: 6rem;
+			padding-top: 2rem;
+			text-align: center;
+			padding-right: 1.2rem;
+		}
+		.lines {
+			margin-top: -6%;
 		}
 	}
 </style>
