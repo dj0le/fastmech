@@ -1,15 +1,16 @@
 <script lang="ts">
 	let { data } = $props();
-	const totalMechs = 97;
+	let totalMechs = 96;
+	console.log(totalMechs);
 
-	function previousMech(mechId) {
+	function previousMech(mechId: number) {
 		mechId = (mechId - 1 + totalMechs) % totalMechs;
 		if (mechId === 0) {
 			mechId = totalMechs - 1;
 		}
 		return mechId;
 	}
-	function nextMech(mechId) {
+	function nextMech(mechId: number) {
 		mechId = (mechId + 1 + totalMechs) % totalMechs;
 		if (mechId === 0) {
 			mechId = 1;

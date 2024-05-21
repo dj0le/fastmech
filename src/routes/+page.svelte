@@ -1,13 +1,13 @@
 <script lang="ts">
 	let { data } = $props();
+	let mechCount: number = $state(96);
 
 	$effect(() => {
 		const cards = document.querySelectorAll('.card');
 		const navigation = document.querySelectorAll('.wrapper button');
 		let visibleCards: number[][] = [];
 		let currentCard = 0;
-		const mechCount = cards.length;
-		console.log(mechCount);
+		mechCount = cards.length;
 
 		for (let i = 0; i < cards.length; i++) {
 			const offsets = [-4, -3, -2, -1, 1, 2, 3, 4].map((offset) => ({
