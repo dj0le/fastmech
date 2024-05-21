@@ -134,11 +134,11 @@
 
 	.info-grid {
 		display: grid;
-		justify-content: start;
 	}
 
 	.details {
 		display: grid;
+		justify-self: start;
 		grid-template-columns: 1fr 1.6fr;
 		gap: 2px;
 	}
