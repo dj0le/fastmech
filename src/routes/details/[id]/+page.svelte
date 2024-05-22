@@ -110,6 +110,7 @@
 		align-items: center;
 	}
 	.h1-container {
+		container-type: inline-size;
 		display: grid;
 		align-items: center;
 	}
@@ -170,7 +171,7 @@
 		}
 		.decoration {
 			padding-block: 32px;
-			font-size: var(--font-size-fluid-3);
+			font-size: 14cqw;
 		}
 		.overview-h2 {
 			justify-self: center;
@@ -190,7 +191,7 @@
 		}
 		.decoration {
 			text-align: left;
-			font-size: 5vw;
+			font-size: 14cqw;
 		}
 		.overview-h2 {
 			padding-top: 2rem;
