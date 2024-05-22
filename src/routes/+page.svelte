@@ -139,9 +139,8 @@
 		display: grid;
 		place-items: center;
 	}
-
 	.lines {
-		margin-top: -172px;
+		margin-top: -96px;
 		width: 100%;
 	}
 	.headline {
@@ -150,6 +149,7 @@
 		font-size: 208px;
 		font-weight: var(--font-weight-hero);
 		letter-spacing: var(--letter-spacing-title);
+		line-height: 0.9em;
 	}
 	.carousel {
 		position: relative;
@@ -226,20 +226,15 @@
 
 	@media (max-width: 1160px) {
 		.lines {
-			margin-top: -10.5rem;
+			margin-top: -74px;
 		}
 		.headline {
-			padding-bottom: 40px;
-			font-size: 100px;
+			font-size: clamp(3.125rem, -1.442rem + 19.231vw, 12.5rem);
 		}
 	}
 	@media (max-width: 620px) {
 		.lines {
-			margin-top: -2.75rem;
-		}
-		.headline {
-			padding-bottom: 0px;
-			font-size: 50px;
+			margin-top: -32px;
 		}
 	}
 </style>

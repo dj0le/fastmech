@@ -187,7 +187,7 @@
 	}
 	@media (min-width: 1101px) {
 		.h1-container {
-			margin-left: -24px;
+			margin-left: -48px;
 		}
 		.decoration {
 			text-align: left;
@@ -199,7 +199,7 @@
 			padding-right: 1.2rem;
 		}
 		.lines {
-			margin-top: -6%;
+			margin-top: -7%;
 		}
 	}
 </style>
