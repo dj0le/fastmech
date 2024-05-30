@@ -2,6 +2,8 @@
 	import Header from './header.svelte';
 	import Footer from './footer.svelte';
 
+	let { children } = $props();
+
 	import 'open-props/style';
 	import 'open-props/normalize';
 	import '../app.css';
@@ -10,7 +12,7 @@
 <div class="layout">
 	<Header />
 	<main>
-		<slot />
+		{@render children()}
 	</main>
 
 	<Footer />

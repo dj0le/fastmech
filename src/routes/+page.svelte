@@ -60,7 +60,7 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Mech-Index</title>
 	<meta name="description" content="Mech Index" />
 </svelte:head>
 
