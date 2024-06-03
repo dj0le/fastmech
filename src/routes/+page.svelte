@@ -1,13 +1,14 @@
 <script lang="ts">
 	let { data } = $props();
-	let mechCount: number = $state(96);
+	let mechIndex = $state([{}]);
+
+	type Filters = 'all' | 'clan' | 'inner-sphere';
 
 	$effect(() => {
 		const cards = document.querySelectorAll('.card');
 		const navigation = document.querySelectorAll('.wrapper button');
 		let visibleCards: number[][] = [];
 		let currentCard = 0;
-		mechCount = cards.length;
 
 		for (let i = 0; i < cards.length; i++) {
 			const offsets = [-4, -3, -2, -1, 1, 2, 3, 4].map((offset) => ({
@@ -56,6 +57,12 @@
 			}
 		}
 		loadCards();
+		function addCards() {
+			mechIndex = [...mechIndex, { cards }];
+		}
+
+		addCards();
+		console.log(cards);
 	});
 </script>
 
