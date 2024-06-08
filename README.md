@@ -1,6 +1,6 @@
 # Mech Index Front End
 
-This is the front end implementation for the mech index project. The mech index is a list of ~100 Battletech mechs. The full project consists of many technologies. The front end is build in svelte 5 with typescript, and uses Open Props for efficient CSS styling. The back end was written in Python, using FastAPI. The database is SQL Lite. The project is hosted on a VPS running Coolify.
+This is the front end implementation for the mech index project. The mech index is a list of many popular Battletech mechs. The full project uses a wide assortment of technologies. The front end is build in svelte 5 with typescript, and uses Open Props for efficient CSS styling. The back end was written in Python, using FastAPI. The database is SQL Lite. The project is hosted on a VPS running Coolify.
 
 To see the current project implementation:
 
