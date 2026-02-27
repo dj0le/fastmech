@@ -23,6 +23,6 @@ export interface MechShort {
 	id: number;
 	chassis: string;
 	weightClass: string;
-	role: number;
+	role: string;
 	thumbnail: string;
 }

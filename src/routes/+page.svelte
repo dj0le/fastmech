@@ -1,71 +1,61 @@
 <script lang="ts">
-	import { PUBLIC_API_URL } from '$env/static/public';
-
 	let { data } = $props();
-	let mechIndex = $state([{}]);
+	let currentCard = $state(0);
 
-	type Filters = 'all' | 'clan' | 'inner-sphere';
-
-	$effect(() => {
-		const cards = document.querySelectorAll('.card');
-		const navigation = document.querySelectorAll('.wrapper button');
-		let visibleCards: number[][] = [];
-		let currentCard = 0;
-
-		for (let i = 0; i < cards.length; i++) {
-			const offsets = [-4, -3, -2, -1, 1, 2, 3, 4].map((offset) => ({
-				value: offset
-			}));
-			const card = [];
-			for (const o of offsets) {
-				card.push((i + o.value + cards.length) % cards.length);
-			}
-			visibleCards.push(card);
+	const visibleCards = $derived.by(() => {
+		const cards: number[][] = [];
+		const offsets = [-4, -3, -2, -1, 1, 2, 3, 4];
+		for (let i = 0; i < data.mechs.length; i++) {
+			cards.push(offsets.map((offset) => (i + offset + data.mechs.length) % data.mechs.length));
 		}
-
-		navigation.forEach((btn) => {
-			btn.addEventListener('click', () => {
-				btn.id === 'right'
-					? (currentCard = visibleCards[currentCard][4])
-					: (currentCard = visibleCards[currentCard][3]);
-				loadCards();
-			});
-		});
-		function loadCards() {
-			const card = cards[currentCard];
-			const visibleCard = visibleCards[currentCard];
-			card.style.transform = 'none';
-			card.style.zIndex = 5;
-			card.style.filter = 'none';
-			card.style.opacity = 1;
-
-			for (let i = currentCard + 1; i != cards.length; i++) {
-				cards[i].style.opacity = 0;
-			}
-
-			for (let i = 0; i < visibleCard.length; i++) {
-				const card = cards[visibleCard[i]];
-				card.style.filter = 'blur(1px)';
-				card.style.zIndex = i <= 3 ? i + 1 : -(i - 3);
-				card.style.opacity = i <= 0 || i >= 7 ? '0' : '.4';
-				card.style.transform =
-					i <= 3
-						? `translateX(${-((4 - i) * 120)}px) translateY(${
-								(4 - i) * 40
-							}px) scale(${(i + 1) * 0.2}) perspective(16px) rotateY(1deg)`
-						: `translateX(${(i - 3) * 120}px) translateY(${(i - 3) * 40}px) scale(${
-								(8 - i) * 0.2
-							}) perspective(16px) rotateY(-1deg)`;
-			}
-		}
-		loadCards();
-		function addCards() {
-			mechIndex = [...mechIndex, { cards }];
-		}
-
-		addCards();
-		console.log(cards);
+		return cards;
 	});
+
+	const cardStyles = $derived.by(() => {
+		if (data.mechs.length === 0 || visibleCards.length === 0) return [];
+
+		const styles: Array<{ transform: string; zIndex: string; filter: string; opacity: string }> =
+			[];
+		const visible = visibleCards[currentCard];
+
+		for (let i = 0; i < data.mechs.length; i++) {
+			if (i === currentCard) {
+				styles.push({
+					transform: 'translateY(-50%)',
+					zIndex: '5',
+					filter: 'none',
+					opacity: '1'
+				});
+			} else if (visible) {
+				const vi = visible.indexOf(i);
+				if (vi !== -1) {
+					const transform =
+						vi <= 3
+							? `translateX(${-((4 - vi) * 120)}px) translateY(calc(-50% + ${(4 - vi) * 40}px)) scale(${(vi + 1) * 0.2}) perspective(16px) rotateY(1deg)`
+							: `translateX(${(vi - 3) * 120}px) translateY(calc(-50% + ${(vi - 3) * 40}px)) scale(${(8 - vi) * 0.2}) perspective(16px) rotateY(-1deg)`;
+					styles.push({
+						transform,
+						zIndex: vi <= 3 ? String(vi + 1) : String(-(vi - 3)),
+						filter: 'blur(1px)',
+						opacity: vi <= 0 || vi >= 7 ? '0' : '0.4'
+					});
+				} else {
+					styles.push({ transform: 'none', zIndex: '0', filter: 'none', opacity: '0' });
+				}
+			} else {
+				styles.push({ transform: 'none', zIndex: '0', filter: 'none', opacity: '0' });
+			}
+		}
+		return styles;
+	});
+
+	function navigateCarousel(direction: 'left' | 'right') {
+		if (data.mechs.length === 0 || visibleCards.length === 0) return;
+		currentCard =
+			direction === 'right'
+				? visibleCards[currentCard][4]
+				: visibleCards[currentCard][3];
+	}
 </script>
 
 <svelte:head>
@@ -92,16 +82,22 @@
 	</div>
 	<div class="wrapper">
 		<div>
-			<button id="left">{`<`}</button>
+			<button id="left" onclick={() => navigateCarousel('left')}>&lt;</button>
 		</div>
 		<ul class="carousel">
-			{#each data.mechs as mech}
-				<li class="card">
+			{#each data.mechs as mech, i}
+				<li
+					class="card"
+					style:transform={cardStyles[i]?.transform}
+					style:z-index={cardStyles[i]?.zIndex}
+					style:filter={cardStyles[i]?.filter}
+					style:opacity={cardStyles[i]?.opacity}
+				>
 					<div class="radial-gradient">
 						<img
 							class="card-image"
-							src="{PUBLIC_API_URL}/static/thumbs/{mech.thumbnail}"
-							alt="TWO Battlemech"
+							src="/static/thumbs/{mech.thumbnail}"
+							alt="{mech.chassis} Battlemech"
 						/>
 					</div>
 					<div>
@@ -138,7 +134,7 @@
 			{/each}
 		</ul>
 		<div class="column-two">
-			<button id="right">{`>`}</button>
+			<button id="right" onclick={() => navigateCarousel('right')}>&gt;</button>
 		</div>
 	</div>
 </section>
@@ -166,6 +162,9 @@
 		height: 520px;
 		overflow: hidden;
 		z-index: 5;
+		list-style: none;
+		padding: 0;
+		margin: 0;
 	}
 	.primary {
 		width: 100%;
@@ -184,11 +183,12 @@
 
 	.card {
 		position: absolute;
-		transition: 0.5s;
-		left: calc(50% - 130px);
-		top: 0;
+		transition: all 0.5s ease;
+		width: clamp(200px, 25vw, 350px);
+		left: 50%;
+		top: 50%;
+		margin-left: calc(clamp(200px, 25vw, 350px) / -2);
 		display: grid;
-		width: 280px;
 		background-color: var(--surface-3);
 		color: var(--text-3);
 		border: 2px solid var(--border);

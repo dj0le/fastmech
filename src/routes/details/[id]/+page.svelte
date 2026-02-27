@@ -1,9 +1,6 @@
 <script lang="ts">
-	import { PUBLIC_API_URL } from '$env/static/public';
-
 	let { data } = $props();
 	let totalMechs = 96;
-	console.log(totalMechs);
 
 	function previousMech(mechId: number) {
 		mechId = (mechId - 1 + totalMechs) % totalMechs;
@@ -24,7 +21,7 @@
 <main>
 	<div class="wrapper">
 		<div class="arrow-nav">
-			<a href={previousMech(data.details.id)} id="left">{`<`}</a>
+			<a href="/details/{previousMech(data.details.id)}" id="left">&lt;</a>
 		</div>
 
 		<div class="mech-overview">
@@ -32,7 +29,7 @@
 				<div class="overview-image">
 					<img
 						class="card-image"
-						src="{PUBLIC_API_URL}/static/fullsize/{data.details.fullsize}"
+						src="/static/fullsize/{data.details.fullsize}"
 						alt={data.details.chassis}
 						width="auto"
 						height="1000"
@@ -99,7 +96,7 @@
 		</div>
 
 		<div class="arrow-nav column-two">
-			<a href={nextMech(data.details.id)} id="right">{`>`}</a>
+			<a href="/details/{nextMech(data.details.id)}" id="right">&gt;</a>
 		</div>
 	</div>
 </main>

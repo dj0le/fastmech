@@ -33,8 +33,6 @@ jobs:
           context: .
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          build-args: |
-            PUBLIC_API_URL=https://mech-index.com
 
   deploy:
     needs: build-and-push
