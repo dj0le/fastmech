@@ -68,9 +68,6 @@
 		align-items: center;
 		gap: 6px;
 		padding: 8px;
-		background: var(--surface-1);
-		border: 2px solid var(--surface-4);
-		border-radius: 6px;
 		margin-top: 6px;
 	}
 
@@ -103,6 +100,7 @@
 		color: var(--text-1);
 		font-size: 0.875rem;
 		white-space: nowrap;
+		padding: 4px 16px;
 	}
 
 	.clear-btn {
@@ -110,13 +108,16 @@
 		color: var(--surface-4);
 		border: 2px solid var(--surface-4);
 		border-radius: 6px;
-		padding: 4px 12px;
+		padding: 4px 16px;
 		font-family: var(--font-title);
 		font-size: 0.875rem;
 		height: 32px;
 		cursor: pointer;
 		transition: all ease-out 0.2s;
 		white-space: nowrap;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.clear-btn:hover {

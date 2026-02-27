@@ -63,6 +63,15 @@ export function getFilterOptions() {
 	return _filterOptions;
 }
 
+const _activeFilterCount = $derived(
+	[filters.search, filters.weightClass, filters.role, filters.origin, filters.structureType]
+		.filter(Boolean).length
+);
+
+export function getActiveFilterCount() {
+	return _activeFilterCount;
+}
+
 export function clearFilters() {
 	filters.search = '';
 	filters.weightClass = '';
