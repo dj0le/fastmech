@@ -1,105 +1,132 @@
 <script lang="ts">
-	let { data } = $props();
-	let totalMechs = 96;
+	import { page } from '$app/stores';
+	import { getAllMechs, getFilteredMechs } from '$lib/mech-state.svelte';
+	import DecorativeLines from '$lib/components/DecorativeLines.svelte';
 
-	function previousMech(mechId: number) {
-		mechId = (mechId - 1 + totalMechs) % totalMechs;
-		if (mechId === 0) {
-			mechId = totalMechs - 1;
-		}
-		return mechId;
-	}
-	function nextMech(mechId: number) {
-		mechId = (mechId + 1 + totalMechs) % totalMechs;
-		if (mechId === 0) {
-			mechId = 1;
-		}
-		return mechId;
-	}
+	const allMechs = $derived(getAllMechs());
+	const filteredMechs = $derived(getFilteredMechs());
+
+	let imageLoaded = $state(false);
+
+	const mechId = $derived(Number($page.params.id));
+	const mech = $derived(allMechs.find((m) => m.id === mechId));
+
+	const filteredIndex = $derived(filteredMechs.findIndex((m) => m.id === mechId));
+	const inFilteredSet = $derived(filteredIndex !== -1);
+	const prevId = $derived(
+		inFilteredSet
+			? filteredMechs[(filteredIndex - 1 + filteredMechs.length) % filteredMechs.length].id
+			: null
+	);
+	const nextId = $derived(
+		inFilteredSet
+			? filteredMechs[(filteredIndex + 1) % filteredMechs.length].id
+			: null
+	);
+
+	$effect(() => {
+		mechId;
+		imageLoaded = false;
+	});
+
+	$effect(() => {
+		if (!inFilteredSet) return;
+		const prevMech =
+			filteredMechs[(filteredIndex - 1 + filteredMechs.length) % filteredMechs.length];
+		const nextMech = filteredMechs[(filteredIndex + 1) % filteredMechs.length];
+		if (prevMech?.fullsize) new Image().src = `/static/fullsize/${prevMech.fullsize}`;
+		if (nextMech?.fullsize) new Image().src = `/static/fullsize/${nextMech.fullsize}`;
+	});
 </script>
 
-<main>
-	<div class="wrapper">
-		<div class="arrow-nav">
-			<a href="/details/{previousMech(data.details.id)}" id="left">&lt;</a>
-		</div>
-
-		<div class="mech-overview">
-			<div class="mech-grid faded">
-				<div class="overview-image">
-					<img
-						class="card-image"
-						src="/static/fullsize/{data.details.fullsize}"
-						alt={data.details.chassis}
-						width="auto"
-						height="1000"
-					/>
+{#if mech}
+	<main>
+		<div class="wrapper">
+			{#if inFilteredSet}
+				<div class="arrow-nav">
+					<a href="/details/{prevId}" data-sveltekit-preload-data="hover" id="left">&lt;</a>
 				</div>
+			{:else}
+				<div></div>
+			{/if}
 
-				<div class="column">
-					<div class="info-grid">
-						<div class="h1-container">
-							<h1 class="decoration">{data.details.chassis}</h1>
-							<div class="lines">
-								<svg
-									width="1138"
-									height="21"
-									viewBox="0 0 1138 21"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path d="M0 19H1138" stroke="#899D82" stroke-opacity="0.8" stroke-width="3" />
-									<path d="M0 10H1138" stroke="#899D82" stroke-opacity="0.6" stroke-width="2" />
-									<path d="M0 1H1138" stroke="#899D82" stroke-opacity="0.4" stroke-width="2" />
-								</svg>
+			<div class="mech-overview">
+				<div class="mech-grid faded">
+					<div class="overview-image">
+						<img
+							class="card-image"
+							class:image-loaded={imageLoaded}
+							src="/static/fullsize/{mech.fullsize}"
+							alt={mech.chassis}
+							width="auto"
+							height="1000"
+							onload={() => (imageLoaded = true)}
+						/>
+					</div>
+
+					<div class="column">
+						<div class="info-grid">
+							<div class="h1-container">
+								<h1 class="decoration">{mech.chassis}</h1>
+								<div class="lines">
+									<DecorativeLines />
+								</div>
 							</div>
-						</div>
-						<div class="details">
-							<div class="column-left">
-								<h2 class="overview-h2">overview:</h2>
+							<div class="details">
+								<div class="column-left">
+									<h2 class="overview-h2">overview:</h2>
+								</div>
+								<div class="column-right"></div>
+								<div class="column-left">Designation:</div>
+								<div class="column-right">{mech.shortName}</div>
+								<div class="column-left">Year:</div>
+								<div class="column-right">{mech.year}</div>
+								<div class="column-left">Weight</div>
+								<div class="column-right">{mech.weight}</div>
+								<div class="column-left">Class:</div>
+								<div class="column-right">{mech.weightClass}</div>
+								<div class="column-left">Role:</div>
+								<div class="column-right">{mech.role}</div>
+								<div class="column-left">Cost:</div>
+								<div class="column-right">{mech.cost}</div>
+								<div class="column-left">BV:</div>
+								<div class="column-right">{mech.bv}</div>
+								<div class="column-left">Origin:</div>
+								<div class="column-right">{mech.origin}</div>
+								<div class="column-left">Armor Type:</div>
+								<div class="column-right">{mech.armorType}</div>
+								<div class="column-left">External Armor:</div>
+								<div class="column-right">{mech.externalArmor}</div>
+								<div class="column-left">Internal Armor:</div>
+								<div class="column-right">{mech.internalArmor}</div>
+								<div class="column-left">Structure Type:</div>
+								<div class="column-right">{mech.structureType}</div>
+								<div class="column-left">Engine:</div>
+								<div class="column-right">{mech.engine}</div>
+								<div class="column-left">Heat Capacity:</div>
+								<div class="column-right">{mech.heatCapacity}</div>
+								<div class="column-left">Heat Sinks:</div>
+								<div class="column-right">{mech.heatSinks}</div>
 							</div>
-							<div class="column-right"></div>
-							<div class="column-left">Designation:</div>
-							<div class="column-right">{data.details.shortName}</div>
-							<div class="column-left">Year:</div>
-							<div class="column-right">{data.details.year}</div>
-							<div class="column-left">Weight</div>
-							<div class="column-right">{data.details.weight}</div>
-							<div class="column-left">Class:</div>
-							<div class="column-right">{data.details.weightClass}</div>
-							<div class="column-left">Role:</div>
-							<div class="column-right">{data.details.role}</div>
-							<div class="column-left">Cost:</div>
-							<div class="column-right">{data.details.cost}</div>
-							<div class="column-left">BV:</div>
-							<div class="column-right">{data.details.bv}</div>
-							<div class="column-left">Origin:</div>
-							<div class="column-right">{data.details.origin}</div>
-							<div class="column-left">Armor Type:</div>
-							<div class="column-right">{data.details.armorType}</div>
-							<div class="column-left">External Armor:</div>
-							<div class="column-right">{data.details.externalArmor}</div>
-							<div class="column-left">Internal Armor:</div>
-							<div class="column-right">{data.details.internalArmor}</div>
-							<div class="column-left">Structure Type:</div>
-							<div class="column-right">{data.details.structureType}</div>
-							<div class="column-left">Engine:</div>
-							<div class="column-right">{data.details.engine}</div>
-							<div class="column-left">Heat Capacity:</div>
-							<div class="column-right">{data.details.heatCapacity}</div>
-							<div class="column-left">Heat Sinks:</div>
-							<div class="column-right">{data.details.heatSinks}</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="arrow-nav column-two">
-			<a href="/details/{nextMech(data.details.id)}" id="right">&gt;</a>
+			{#if inFilteredSet}
+				<div class="arrow-nav column-two">
+					<a href="/details/{nextId}" data-sveltekit-preload-data="hover" id="right">&gt;</a>
+				</div>
+			{:else}
+				<div></div>
+			{/if}
 		</div>
-	</div>
-</main>
+	</main>
+{:else}
+	<main>
+		<p class="not-found">Mech not found</p>
+	</main>
+{/if}
 
 <style>
 	.mech-grid {
@@ -117,7 +144,7 @@
 		color: var(--text-2);
 		font-family: var(--font-title);
 		font-weight: var(--font-weight-hero);
-		letter-spacing: -var(--letter-spacing-title);
+		letter-spacing: calc(-1 * var(--letter-spacing-title));
 		line-height: 0.9em;
 	}
 	.lines {
@@ -131,6 +158,15 @@
 
 	.overview-image {
 		justify-self: end;
+	}
+
+	.card-image {
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+
+	.image-loaded {
+		opacity: 1;
 	}
 
 	.info-grid {
@@ -158,6 +194,14 @@
 		font-size: 1.5rem;
 		font-weight: var(--font-weight-bold);
 		color: var(--text-4);
+	}
+
+	.not-found {
+		text-align: center;
+		font-family: var(--font-title);
+		font-size: 1.5rem;
+		color: var(--text-2);
+		padding: 4rem 0;
 	}
 
 	@media (max-width: 1100px) {

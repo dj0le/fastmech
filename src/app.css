@@ -62,7 +62,7 @@ a {
 	text-decoration: none;
 }
 
-a :hover {
+a:hover {
 	color: var(--text-4);
 }
 
@@ -96,7 +96,7 @@ a :hover {
 	color: var(--surface-4);
 	background-color: var(--surface-1);
 	border: 2px solid var(--surface-4);
-	border-radius: 12px;
+	border-radius: var(--radius-3);
 	font-family: var(--font-body);
 	font-weight: var(--font-weight-bold);
 	transition: all ease-out 0.2s;

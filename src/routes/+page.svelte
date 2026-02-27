@@ -1,24 +1,34 @@
 <script lang="ts">
-	let { data } = $props();
+	import { getFilteredMechs } from '$lib/mech-state.svelte';
+	import DecorativeLines from '$lib/components/DecorativeLines.svelte';
+
+	const filteredMechs = $derived(getFilteredMechs());
 	let currentCard = $state(0);
+
+	$effect(() => {
+		filteredMechs;
+		currentCard = 0;
+	});
 
 	const visibleCards = $derived.by(() => {
 		const cards: number[][] = [];
 		const offsets = [-4, -3, -2, -1, 1, 2, 3, 4];
-		for (let i = 0; i < data.mechs.length; i++) {
-			cards.push(offsets.map((offset) => (i + offset + data.mechs.length) % data.mechs.length));
+		for (let i = 0; i < filteredMechs.length; i++) {
+			cards.push(
+				offsets.map((offset) => (i + offset + filteredMechs.length) % filteredMechs.length)
+			);
 		}
 		return cards;
 	});
 
 	const cardStyles = $derived.by(() => {
-		if (data.mechs.length === 0 || visibleCards.length === 0) return [];
+		if (filteredMechs.length === 0 || visibleCards.length === 0) return [];
 
 		const styles: Array<{ transform: string; zIndex: string; filter: string; opacity: string }> =
 			[];
 		const visible = visibleCards[currentCard];
 
-		for (let i = 0; i < data.mechs.length; i++) {
+		for (let i = 0; i < filteredMechs.length; i++) {
 			if (i === currentCard) {
 				styles.push({
 					transform: 'translateY(-50%)',
@@ -50,11 +60,9 @@
 	});
 
 	function navigateCarousel(direction: 'left' | 'right') {
-		if (data.mechs.length === 0 || visibleCards.length === 0) return;
+		if (filteredMechs.length === 0 || visibleCards.length === 0) return;
 		currentCard =
-			direction === 'right'
-				? visibleCards[currentCard][4]
-				: visibleCards[currentCard][3];
+			direction === 'right' ? visibleCards[currentCard][4] : visibleCards[currentCard][3];
 	}
 </script>
 
@@ -67,76 +75,70 @@
 	<div class="h1-container">
 		<h1 class="headline">Mech Index</h1>
 		<div class="lines">
-			<svg
-				width="1138"
-				height="21"
-				viewBox="0 0 1138 21"
-				fill="none"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path d="M0 19H1138" stroke="#899D82" stroke-opacity="0.8" stroke-width="3" />
-				<path d="M0 10H1138" stroke="#899D82" stroke-opacity="0.6" stroke-width="2" />
-				<path d="M0 1H1138" stroke="#899D82" stroke-opacity="0.4" stroke-width="2" />
-			</svg>
+			<DecorativeLines />
 		</div>
 	</div>
-	<div class="wrapper">
-		<div>
-			<button id="left" onclick={() => navigateCarousel('left')}>&lt;</button>
-		</div>
-		<ul class="carousel">
-			{#each data.mechs as mech, i}
-				<li
-					class="card"
-					style:transform={cardStyles[i]?.transform}
-					style:z-index={cardStyles[i]?.zIndex}
-					style:filter={cardStyles[i]?.filter}
-					style:opacity={cardStyles[i]?.opacity}
-				>
-					<div class="radial-gradient">
-						<img
-							class="card-image"
-							src="/static/thumbs/{mech.thumbnail}"
-							alt="{mech.chassis} Battlemech"
-						/>
-					</div>
-					<div>
-						<div class="content">
-							<h3 class="card-title">{mech.chassis}</h3>
-							<div class="info">
-								<p>{mech.weightClass}</p>
-								<p class="align-right">{mech.role}</p>
+	{#if filteredMechs.length === 0}
+		<p class="empty-state">No mechs match the current filters.</p>
+	{:else}
+		<div class="wrapper">
+			<div>
+				<button id="left" onclick={() => navigateCarousel('left')}>&lt;</button>
+			</div>
+			<ul class="carousel">
+				{#each filteredMechs as mech, i}
+					<li
+						class="card"
+						style:transform={cardStyles[i]?.transform}
+						style:z-index={cardStyles[i]?.zIndex}
+						style:filter={cardStyles[i]?.filter}
+						style:opacity={cardStyles[i]?.opacity}
+					>
+						<div class="radial-gradient">
+							<img
+								class="card-image"
+								src="/static/thumbs/{mech.thumbnail}"
+								alt="{mech.chassis} Battlemech"
+							/>
+						</div>
+						<div>
+							<div class="content">
+								<h3 class="card-title">{mech.chassis}</h3>
+								<div class="info">
+									<p>{mech.weightClass}</p>
+									<p class="align-right">{mech.role}</p>
+								</div>
+							</div>
+
+							<div class="controls">
+								<a href="details/{mech.id}" class="button primary">
+									Overview
+									<svg
+										width="18"
+										height="10"
+										viewBox="0 0 18 10"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											d="M13.1667 1.6665L16.5 4.99984M16.5 4.99984L13.1667 8.33317M16.5 4.99984L1.5 4.99984"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
+									</svg>
+								</a>
 							</div>
 						</div>
-
-						<div class="controls">
-							<a href="details/{mech.id}" class="button primary">
-								Overview
-								<svg
-									width="18"
-									height="10"
-									viewBox="0 0 18 10"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										d="M13.1667 1.6665L16.5 4.99984M16.5 4.99984L13.1667 8.33317M16.5 4.99984L1.5 4.99984"
-										stroke="currentColor"
-										stroke-width="2"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									/>
-								</svg>
-							</a>
-						</div>
-					</div>
-				</li>
-			{/each}
-		</ul>
-		<div class="column-two">
-			<button id="right" onclick={() => navigateCarousel('right')}>&gt;</button>
+					</li>
+				{/each}
+			</ul>
+			<div class="column-two">
+				<button id="right" onclick={() => navigateCarousel('right')}>&gt;</button>
+			</div>
 		</div>
-	</div>
+	{/if}
 </section>
 
 <style>
@@ -231,6 +233,14 @@
 
 	.align-right {
 		text-align: end;
+	}
+
+	.empty-state {
+		text-align: center;
+		font-family: var(--font-title);
+		font-size: 1.5rem;
+		color: var(--text-2);
+		padding: 4rem 0;
 	}
 
 	@media (max-width: 1160px) {

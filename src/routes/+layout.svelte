@@ -1,12 +1,17 @@
 <script lang="ts">
 	import Header from './header.svelte';
 	import Footer from './footer.svelte';
+	import { setAllMechs } from '$lib/mech-state.svelte';
 
-	let { children } = $props();
+	let { data, children } = $props();
 
 	import 'open-props/style';
 	import 'open-props/normalize';
 	import '../app.css';
+
+	$effect(() => {
+		setAllMechs(data.mechs);
+	});
 </script>
 
 <div class="layout">

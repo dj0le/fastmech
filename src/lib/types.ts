@@ -16,13 +16,14 @@ export interface Mech {
 	engine: string;
 	heatCapacity: number;
 	heatSinks: number;
+	thumbnail: string;
 	fullsize: string;
 }
 
-export interface MechShort {
-	id: number;
-	chassis: string;
+export interface FilterState {
+	search: string;
 	weightClass: string;
 	role: string;
-	thumbnail: string;
+	origin: string;
+	structureType: string;
 }
