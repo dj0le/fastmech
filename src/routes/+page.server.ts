@@ -1,5 +1,7 @@
+import { API_URL } from '$env/static/private';
+
 async function getMechs() {
-	const response = await fetch('https://po4cwo4.thockyspace.com/');
+	const response = await fetch(`${API_URL}/`);
 	return response.json();
 }
 

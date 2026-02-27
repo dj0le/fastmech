@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { PUBLIC_API_URL } from '$env/static/public';
+
 	let { data } = $props();
 	let totalMechs = 96;
 	console.log(totalMechs);
@@ -30,7 +32,7 @@
 				<div class="overview-image">
 					<img
 						class="card-image"
-						src="https://po4cwo4.thockyspace.com/static/fullsize/{data.details.fullsize}"
+						src="{PUBLIC_API_URL}/static/fullsize/{data.details.fullsize}"
 						alt={data.details.chassis}
 						width="auto"
 						height="1000"

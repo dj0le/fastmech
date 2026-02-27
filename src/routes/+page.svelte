@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { PUBLIC_API_URL } from '$env/static/public';
+
 	let { data } = $props();
 	let mechIndex = $state([{}]);
 
@@ -98,7 +100,7 @@
 					<div class="radial-gradient">
 						<img
 							class="card-image"
-							src="https://po4cwo4.thockyspace.com/static/thumbs/{mech.thumbnail}"
+							src="{PUBLIC_API_URL}/static/thumbs/{mech.thumbnail}"
 							alt="TWO Battlemech"
 						/>
 					</div>
