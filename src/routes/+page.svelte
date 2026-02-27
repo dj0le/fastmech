@@ -10,9 +10,11 @@
 		currentCard = 0;
 	});
 
+	const useSmallCarousel = $derived(filteredMechs.length > 0 && filteredMechs.length <= 6);
+
 	const visibleCards = $derived.by(() => {
 		const cards: number[][] = [];
-		const offsets = [-4, -3, -2, -1, 1, 2, 3, 4];
+		const offsets = useSmallCarousel ? [-2, -1, 1, 2] : [-4, -3, -2, -1, 1, 2, 3, 4];
 		for (let i = 0; i < filteredMechs.length; i++) {
 			cards.push(
 				offsets.map((offset) => (i + offset + filteredMechs.length) % filteredMechs.length)
@@ -39,16 +41,27 @@
 			} else if (visible) {
 				const vi = visible.indexOf(i);
 				if (vi !== -1) {
-					const transform =
-						vi <= 3
-							? `translateX(${-((4 - vi) * 120)}px) translateY(calc(-50% + ${(4 - vi) * 40}px)) scale(${(vi + 1) * 0.2}) perspective(16px) rotateY(1deg)`
-							: `translateX(${(vi - 3) * 120}px) translateY(calc(-50% + ${(vi - 3) * 40}px)) scale(${(8 - vi) * 0.2}) perspective(16px) rotateY(-1deg)`;
-					styles.push({
-						transform,
-						zIndex: vi <= 3 ? String(vi + 1) : String(-(vi - 3)),
-						filter: 'blur(1px)',
-						opacity: vi <= 0 || vi >= 7 ? '0' : '0.4'
-					});
+					let transform: string;
+					let zIndex: string;
+					let opacity: string;
+
+					if (useSmallCarousel) {
+						transform =
+							vi <= 1
+								? `translateX(${-((2 - vi) * 140)}px) translateY(calc(-50% + ${(2 - vi) * 30}px)) scale(${(vi + 1) * 0.3}) perspective(16px) rotateY(1deg)`
+								: `translateX(${(vi - 1) * 140}px) translateY(calc(-50% + ${(vi - 1) * 30}px)) scale(${(4 - vi) * 0.3}) perspective(16px) rotateY(-1deg)`;
+						zIndex = vi <= 1 ? String(vi + 1) : String(4 - vi);
+						opacity = '0.4';
+					} else {
+						transform =
+							vi <= 3
+								? `translateX(${-((4 - vi) * 120)}px) translateY(calc(-50% + ${(4 - vi) * 40}px)) scale(${(vi + 1) * 0.2}) perspective(16px) rotateY(1deg)`
+								: `translateX(${(vi - 3) * 120}px) translateY(calc(-50% + ${(vi - 3) * 40}px)) scale(${(8 - vi) * 0.2}) perspective(16px) rotateY(-1deg)`;
+						zIndex = vi <= 3 ? String(vi + 1) : String(-(vi - 3));
+						opacity = vi <= 0 || vi >= 7 ? '0' : '0.4';
+					}
+
+					styles.push({ transform, zIndex, filter: 'blur(1px)', opacity });
 				} else {
 					styles.push({ transform: 'none', zIndex: '0', filter: 'none', opacity: '0' });
 				}
@@ -61,8 +74,10 @@
 
 	function navigateCarousel(direction: 'left' | 'right') {
 		if (filteredMechs.length === 0 || visibleCards.length === 0) return;
+		const navRight = useSmallCarousel ? 2 : 4;
+		const navLeft = useSmallCarousel ? 1 : 3;
 		currentCard =
-			direction === 'right' ? visibleCards[currentCard][4] : visibleCards[currentCard][3];
+			direction === 'right' ? visibleCards[currentCard][navRight] : visibleCards[currentCard][navLeft];
 	}
 </script>
 

@@ -1,5 +1,7 @@
 import type { Mech, FilterState } from '$lib/types';
 
+const WEIGHT_ORDER = ['Light', 'Medium', 'Heavy', 'Assault'];
+
 let allMechs: Mech[] = $state([]);
 
 export function getAllMechs() {
@@ -35,13 +37,25 @@ export function getFilteredMechs() {
 	return _filteredMechs;
 }
 
+function mechsExcluding(field: keyof FilterState) {
+	return allMechs.filter((m) => {
+		if (field !== 'search' && filters.search && !m.chassis.toLowerCase().includes(filters.search.toLowerCase())) return false;
+		if (field !== 'weightClass' && filters.weightClass && m.weightClass !== filters.weightClass) return false;
+		if (field !== 'role' && filters.role && m.role !== filters.role) return false;
+		if (field !== 'origin' && filters.origin && m.origin !== filters.origin) return false;
+		if (field !== 'structureType' && filters.structureType && m.structureType !== filters.structureType) return false;
+		return true;
+	});
+}
+
 const _filterOptions = $derived.by(() => {
 	const unique = (arr: string[]) => [...new Set(arr)].sort();
 	return {
-		weightClass: unique(allMechs.map((m) => m.weightClass)),
-		role: unique(allMechs.map((m) => m.role)),
-		origin: unique(allMechs.map((m) => m.origin)),
-		structureType: unique(allMechs.map((m) => m.structureType))
+		weightClass: unique(mechsExcluding('weightClass').map((m) => m.weightClass))
+			.sort((a, b) => WEIGHT_ORDER.indexOf(a) - WEIGHT_ORDER.indexOf(b)),
+		role: unique(mechsExcluding('role').map((m) => m.role)),
+		origin: unique(mechsExcluding('origin').map((m) => m.origin)),
+		structureType: unique(mechsExcluding('structureType').map((m) => m.structureType))
 	};
 });
 
