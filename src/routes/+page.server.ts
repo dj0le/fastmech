@@ -1,7 +1,7 @@
-import { API_URL } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 async function getMechs() {
-	const response = await fetch(`${API_URL}/`);
+	const response = await fetch(`${env.API_URL}/`);
 	return response.json();
 }
 
